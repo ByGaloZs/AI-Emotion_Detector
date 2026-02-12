@@ -1,10 +1,15 @@
+"""Unit tests for emotion detection behavior."""
+
 import unittest
 
 from EmotionDetection import emotion_detector
 
 
 class TestEmotionDetector(unittest.TestCase):
+    """Test suite for validating dominant emotion detection."""
+
     def test_emotion_detector(self):
+        """Verify that each sample sentence maps to the expected emotion."""
 
         # Test case for joy emotion
         test1 = emotion_detector("I am glad this happened")
