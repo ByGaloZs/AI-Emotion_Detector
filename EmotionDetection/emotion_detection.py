@@ -33,19 +33,20 @@ def emotion_detector(text_to_analyse):
             value `None`.
     """
     # Watson Emotion Predict service endpoint.
-    url = "https://sn-watson-emotion.labs.skills.network/v1/watson.runtime.nlp.v1/NlpService/EmotionPredict"
+    url = "https://sn-watson-emotion.labs.skills.network/v1/" "watson.runtime.nlp.v1/NlpService/EmotionPredict"
 
     # API payload: raw document containing the input text.
-    myobj = {"raw_document": {"text": text_to_analyse}}
+    payload = {"raw_document": {"text": text_to_analyse}}
 
     # Required header to select the emotion model.
-    header = {"grpc-metadata-mm-model-id": "emotion_aggregated-workflow_lang_en_stock"}
+    headers = {"grpc-metadata-mm-model-id": "emotion_aggregated-workflow_lang_en_stock"}
 
     # Send request to the remote inference service.
-    response = requests.post(url, json=myobj, headers=header)
+    response = requests.post(url, json=payload, headers=headers)
 
     # Handle invalid or empty input reported by the API.
-    if response.status_code == 400:
+    status_code = response.status_code
+    if status_code == 400:
         return {
             "anger": None,
             "disgust": None,
